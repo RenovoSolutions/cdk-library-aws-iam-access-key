@@ -4,6 +4,9 @@
 
 This construct creates IAM user access keys securely.
 
+> **Warning**
+> This is a WIP project
+
 ## Overview
 
 - Uses a custom resource to generate AWS credentials

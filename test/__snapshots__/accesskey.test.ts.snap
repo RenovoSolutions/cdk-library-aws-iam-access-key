@@ -1,0 +1,206 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Snapshot 1`] = `
+Object {
+  "Parameters": Object {
+    "BootstrapVersion": Object {
+      "Default": "/cdk-bootstrap/hnb659fds/version",
+      "Description": "Version of the CDK Bootstrap resources in this environment, automatically retrieved from SSM Parameter Store. [cdk:skip]",
+      "Type": "AWS::SSM::Parameter::Value<String>",
+    },
+  },
+  "Resources": Object {
+    "AccessKeyOnEventHandler25470BD2": Object {
+      "DependsOn": Array [
+        "AccessKeyRoleADB5A258",
+      ],
+      "Properties": Object {
+        "Code": Object {
+          "S3Bucket": Object {
+            "Fn::Sub": "cdk-hnb659fds-assets-\${AWS::AccountId}-\${AWS::Region}",
+          },
+          "S3Key": "0e26ec1e47d8c68bfd1df421c933491b1ac0e1dc7c7dddf68c78ef7e0a8ec5e0.zip",
+        },
+        "Handler": "index.handler",
+        "Role": Object {
+          "Fn::GetAtt": Array [
+            "AccessKeyRoleADB5A258",
+            "Arn",
+          ],
+        },
+        "Runtime": "python3.9",
+        "Timeout": 30,
+      },
+      "Type": "AWS::Lambda::Function",
+    },
+    "AccessKeyRoleADB5A258": Object {
+      "Properties": Object {
+        "AssumeRolePolicyDocument": Object {
+          "Statement": Array [
+            Object {
+              "Action": "sts:AssumeRole",
+              "Effect": "Allow",
+              "Principal": Object {
+                "Service": "lambda.amazonaws.com",
+              },
+            },
+          ],
+          "Version": "2012-10-17",
+        },
+        "ManagedPolicyArns": Array [
+          Object {
+            "Ref": "AccessKeySecretsManagerPolicy9E9D8FF3",
+          },
+          Object {
+            "Fn::Join": Array [
+              "",
+              Array [
+                "arn:",
+                Object {
+                  "Ref": "AWS::Partition",
+                },
+                ":iam::aws:policy/service-role/AWSLambdaBasicExecutionRole",
+              ],
+            ],
+          },
+        ],
+      },
+      "Type": "AWS::IAM::Role",
+    },
+    "AccessKeySecretArn846E33B5": Object {
+      "DeletionPolicy": "Delete",
+      "Properties": Object {
+        "KmsKeyId": "alias/aws/secretsmanager",
+        "Override": true,
+        "Region": Object {
+          "Ref": "AWS::Region",
+        },
+        "Restore": true,
+        "SecretName": Object {
+          "Fn::Join": Array [
+            "",
+            Array [
+              "TestStackAccessKeyAE8900C2",
+              Object {
+                "Ref": "User00B015A1",
+              },
+            ],
+          ],
+        },
+        "ServiceToken": Object {
+          "Fn::GetAtt": Array [
+            "AccessKeyOnEventHandler25470BD2",
+            "Arn",
+          ],
+        },
+        "UserName": Object {
+          "Ref": "User00B015A1",
+        },
+      },
+      "Type": "AWS::CloudFormation::CustomResource",
+      "UpdateReplacePolicy": "Delete",
+    },
+    "AccessKeySecretsManagerPolicy9E9D8FF3": Object {
+      "Properties": Object {
+        "Description": "",
+        "Path": "/",
+        "PolicyDocument": Object {
+          "Statement": Array [
+            Object {
+              "Action": Array [
+                "secretsmanager:PutSecretValue",
+                "secretsmanager:CreateSecret",
+                "secretsmanager:DeleteSecret",
+                "secretsmanager:UpdateSecret",
+                "secretsmanager:TagResource",
+                "secretsmanager:RestoreSecret",
+              ],
+              "Effect": "Allow",
+              "Resource": Object {
+                "Fn::Join": Array [
+                  "",
+                  Array [
+                    "arn:aws:secretsmanager:",
+                    Object {
+                      "Ref": "AWS::Region",
+                    },
+                    ":",
+                    Object {
+                      "Ref": "AWS::AccountId",
+                    },
+                    ":secret:TestStackAccessKeyAE8900C2",
+                    Object {
+                      "Ref": "User00B015A1",
+                    },
+                    "-*",
+                  ],
+                ],
+              },
+              "Sid": "SecretsManagerPolicy",
+            },
+            Object {
+              "Action": Array [
+                "iam:CreateAccessKey",
+                "iam:DeleteAccessKey",
+                "iam:ListAccessKeys",
+              ],
+              "Condition": Object {
+                "StringEquals": Object {
+                  "iam:ResourceTag/CfnStackIdForAccessKeyLibrary": Object {
+                    "Ref": "AWS::StackId",
+                  },
+                },
+              },
+              "Effect": "Allow",
+              "Resource": "*",
+              "Sid": "IamAllowKeyManagementPolicy",
+            },
+          ],
+          "Version": "2012-10-17",
+        },
+      },
+      "Type": "AWS::IAM::ManagedPolicy",
+    },
+    "User00B015A1": Object {
+      "Properties": Object {
+        "Tags": Array [
+          Object {
+            "Key": "CfnStackIdForAccessKeyLibrary",
+            "Value": Object {
+              "Ref": "AWS::StackId",
+            },
+          },
+        ],
+      },
+      "Type": "AWS::IAM::User",
+    },
+  },
+  "Rules": Object {
+    "CheckBootstrapVersion": Object {
+      "Assertions": Array [
+        Object {
+          "Assert": Object {
+            "Fn::Not": Array [
+              Object {
+                "Fn::Contains": Array [
+                  Array [
+                    "1",
+                    "2",
+                    "3",
+                    "4",
+                    "5",
+                  ],
+                  Object {
+                    "Ref": "BootstrapVersion",
+                  },
+                ],
+              },
+            ],
+          },
+          "AssertDescription": "CDK bootstrap stack version 6 required. Please run 'cdk bootstrap' with a recent version of the CDK CLI.",
+        },
+      ],
+    },
+  },
+}
+`;
