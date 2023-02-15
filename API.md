@@ -1328,6 +1328,8 @@ const accessKeyFunctionCodeCacheProps: AccessKeyFunctionCodeCacheProps = { ... }
 | <code><a href="#@renovosolutions/cdk-library-aws-iam-access-key.AccessKeyFunctionCodeCacheProps.property.lifecycleRules">lifecycleRules</a></code> | <code>aws-cdk-lib.aws_s3.LifecycleRule[]</code> | Rules that define how Amazon S3 manages objects during their lifetime. |
 | <code><a href="#@renovosolutions/cdk-library-aws-iam-access-key.AccessKeyFunctionCodeCacheProps.property.metrics">metrics</a></code> | <code>aws-cdk-lib.aws_s3.BucketMetrics[]</code> | The metrics configuration of this bucket. |
 | <code><a href="#@renovosolutions/cdk-library-aws-iam-access-key.AccessKeyFunctionCodeCacheProps.property.notificationsHandlerRole">notificationsHandlerRole</a></code> | <code>aws-cdk-lib.aws_iam.IRole</code> | The role to be used by the notifications handler. |
+| <code><a href="#@renovosolutions/cdk-library-aws-iam-access-key.AccessKeyFunctionCodeCacheProps.property.objectLockDefaultRetention">objectLockDefaultRetention</a></code> | <code>aws-cdk-lib.aws_s3.ObjectLockRetention</code> | The default retention mode and rules for S3 Object Lock. |
+| <code><a href="#@renovosolutions/cdk-library-aws-iam-access-key.AccessKeyFunctionCodeCacheProps.property.objectLockEnabled">objectLockEnabled</a></code> | <code>boolean</code> | Enable object lock on the bucket. |
 | <code><a href="#@renovosolutions/cdk-library-aws-iam-access-key.AccessKeyFunctionCodeCacheProps.property.objectOwnership">objectOwnership</a></code> | <code>aws-cdk-lib.aws_s3.ObjectOwnership</code> | The objectOwnership of the bucket. |
 | <code><a href="#@renovosolutions/cdk-library-aws-iam-access-key.AccessKeyFunctionCodeCacheProps.property.publicReadAccess">publicReadAccess</a></code> | <code>boolean</code> | Grants public read access to all objects in the bucket. |
 | <code><a href="#@renovosolutions/cdk-library-aws-iam-access-key.AccessKeyFunctionCodeCacheProps.property.removalPolicy">removalPolicy</a></code> | <code>aws-cdk-lib.RemovalPolicy</code> | Policy to apply when the bucket is removed from this stack. |
@@ -1573,6 +1575,42 @@ The role to be used by the notifications handler.
 
 ---
 
+##### `objectLockDefaultRetention`<sup>Optional</sup> <a name="objectLockDefaultRetention" id="@renovosolutions/cdk-library-aws-iam-access-key.AccessKeyFunctionCodeCacheProps.property.objectLockDefaultRetention"></a>
+
+```typescript
+public readonly objectLockDefaultRetention: ObjectLockRetention;
+```
+
+- *Type:* aws-cdk-lib.aws_s3.ObjectLockRetention
+- *Default:* no default retention period
+
+The default retention mode and rules for S3 Object Lock.
+
+Default retention can be configured after a bucket is created if the bucket already
+has object lock enabled. Enabling object lock for existing buckets is not supported.
+
+> [https://docs.aws.amazon.com/AmazonS3/latest/userguide/object-lock-overview.html#object-lock-bucket-config-enable](https://docs.aws.amazon.com/AmazonS3/latest/userguide/object-lock-overview.html#object-lock-bucket-config-enable)
+
+---
+
+##### `objectLockEnabled`<sup>Optional</sup> <a name="objectLockEnabled" id="@renovosolutions/cdk-library-aws-iam-access-key.AccessKeyFunctionCodeCacheProps.property.objectLockEnabled"></a>
+
+```typescript
+public readonly objectLockEnabled: boolean;
+```
+
+- *Type:* boolean
+- *Default:* false, unless objectLockDefaultRetention is set (then, true)
+
+Enable object lock on the bucket.
+
+Enabling object lock for existing buckets is not supported. Object lock must be
+enabled when the bucket is created.
+
+> [https://docs.aws.amazon.com/AmazonS3/latest/userguide/object-lock-overview.html#object-lock-bucket-config-enable](https://docs.aws.amazon.com/AmazonS3/latest/userguide/object-lock-overview.html#object-lock-bucket-config-enable)
+
+---
+
 ##### `objectOwnership`<sup>Optional</sup> <a name="objectOwnership" id="@renovosolutions/cdk-library-aws-iam-access-key.AccessKeyFunctionCodeCacheProps.property.objectOwnership"></a>
 
 ```typescript
@@ -1664,7 +1702,7 @@ public readonly versioned: boolean;
 ```
 
 - *Type:* boolean
-- *Default:* false
+- *Default:* false (unless object lock is enabled, then true)
 
 Whether this bucket should have versioning turned on or not.
 
