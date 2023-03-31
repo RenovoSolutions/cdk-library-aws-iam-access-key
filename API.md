@@ -351,7 +351,7 @@ To represent all keys, specify ``"*"``.
 
 If you need to specify a keyPattern with multiple components, concatenate them into a single string, e.g.:
 
-   arnForObjects(`home/${team}/${user}/*`)
+  arnForObjects(`home/${team}/${user}/*`)
 
 ###### `keyPattern`<sup>Required</sup> <a name="keyPattern" id="@renovosolutions/cdk-library-aws-iam-access-key.AccessKeyFunctionCodeCache.arnForObjects.parameter.keyPattern"></a>
 
@@ -422,8 +422,8 @@ The method returns the `iam.Grant` object, which can then be modified
 as needed. For example, you can add a condition that will restrict access only
 to an IPv4 range like this:
 
-     const grant = bucket.grantPublicAccess();
-     grant.resourceStatement!.addCondition(‘IpAddress’, { “aws:SourceIp”: “54.240.143.0/24” });
+    const grant = bucket.grantPublicAccess();
+    grant.resourceStatement!.addCondition(‘IpAddress’, { “aws:SourceIp”: “54.240.143.0/24” });
 
 Note that if this `IBucket` refers to an existing bucket, possibly not
 managed by CloudFormation, this method will have no effect, since it's
@@ -559,7 +559,7 @@ use the `grantPutAcl` method.
 ##### `grantWrite` <a name="grantWrite" id="@renovosolutions/cdk-library-aws-iam-access-key.AccessKeyFunctionCodeCache.grantWrite"></a>
 
 ```typescript
-public grantWrite(identity: IGrantable, objectsKeyPattern?: any): Grant
+public grantWrite(identity: IGrantable, objectsKeyPattern?: any, allowedActionPatterns?: string[]): Grant
 ```
 
 Grant write permissions to this bucket to an IAM principal.
@@ -584,6 +584,12 @@ use the `grantPutAcl` method.
 ###### `objectsKeyPattern`<sup>Optional</sup> <a name="objectsKeyPattern" id="@renovosolutions/cdk-library-aws-iam-access-key.AccessKeyFunctionCodeCache.grantWrite.parameter.objectsKeyPattern"></a>
 
 - *Type:* any
+
+---
+
+###### `allowedActionPatterns`<sup>Optional</sup> <a name="allowedActionPatterns" id="@renovosolutions/cdk-library-aws-iam-access-key.AccessKeyFunctionCodeCache.grantWrite.parameter.allowedActionPatterns"></a>
+
+- *Type:* string[]
 
 ---
 
@@ -1406,7 +1412,7 @@ Whether Amazon S3 should use its own intermediary key to generate data keys.
 Only relevant when using KMS for encryption.
 
 - If not enabled, every object GET and PUT will cause an API call to KMS (with the
-   attendant cost implications of that).
+  attendant cost implications of that).
 - If enabled, S3 will use its own time-limited key instead.
 
 Only relevant, when Encryption is set to `BucketEncryption.KMS` or `BucketEncryption.KMS_MANAGED`.
