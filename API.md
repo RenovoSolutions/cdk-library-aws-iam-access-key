@@ -1454,7 +1454,7 @@ public readonly encryption: BucketEncryption;
 ```
 
 - *Type:* aws-cdk-lib.aws_s3.BucketEncryption
-- *Default:* `Kms` if `encryptionKey` is specified, or `Unencrypted` otherwise.
+- *Default:* `Kms` if `encryptionKey` is specified, or `Managed` otherwise.
 
 The kind of server-side encryption to apply to this bucket.
 
