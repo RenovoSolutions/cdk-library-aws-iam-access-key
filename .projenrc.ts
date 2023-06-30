@@ -3,7 +3,7 @@ const project = new awscdk.AwsCdkConstructLibrary({
   author: 'Renovo Solutions',
   authorAddress: 'webmaster+cdk@renovo1.com',
   projenrcTs: true,
-  cdkVersion: '2.81.0',
+  cdkVersion: '2.86.0',
   defaultReleaseBranch: 'master',
   name: '@renovosolutions/cdk-library-aws-iam-access-key',
   description: 'AWS CDK Construct Library for generating AWS access keys and storing them in Secrets Manager',
