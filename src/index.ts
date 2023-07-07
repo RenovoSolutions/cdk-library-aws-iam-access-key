@@ -133,10 +133,23 @@ export class AccessKey extends Construct {
       ],
     });
 
+    const bundlingCmds = [
+      'mkdir -p /asset-output',
+      'pip install -r /asset-input/requirements.txt -t /asset-output',
+      'cp index.py /asset-output/index.py',
+    ];
+
     const onEventHandler = new lambda.Function(this, 'OnEventHandler', {
       runtime: lambda.Runtime.PYTHON_3_9,
       handler: 'index.handler',
-      code: props.lambdaCode ?? lambda.Code.fromAsset(path.join(__dirname, '../lambda')),
+      code: props.lambdaCode ?? lambda.Code.fromAsset(path.join(__dirname, '../lambda'), {
+        bundling: {
+          image: lambda.Runtime.PYTHON_3_9.bundlingImage,
+          command: [
+            'bash', '-c', bundlingCmds.join(' && '),
+          ],
+        },
+      }),
       timeout: Duration.seconds(30),
       role,
     });
