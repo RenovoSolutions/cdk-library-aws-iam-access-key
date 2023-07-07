@@ -1482,7 +1482,7 @@ public readonly encryption: BucketEncryption;
 ```
 
 - *Type:* aws-cdk-lib.aws_s3.BucketEncryption
-- *Default:* `Kms` if `encryptionKey` is specified, or `Managed` otherwise.
+- *Default:* `KMS` if `encryptionKey` is specified, or `UNENCRYPTED` otherwise. But if `UNENCRYPTED` is specified, the bucket will be encrypted as `S3_MANAGED` automatically.
 
 The kind of server-side encryption to apply to this bucket.
 
@@ -1498,13 +1498,12 @@ public readonly encryptionKey: IKey;
 ```
 
 - *Type:* aws-cdk-lib.aws_kms.IKey
-- *Default:* If encryption is set to "Kms" and this property is undefined, a new KMS key will be created and associated with this bucket.
+- *Default:* If `encryption` is set to `KMS` and this property is undefined, a new KMS key will be created and associated with this bucket.
 
 External KMS key to use for bucket encryption.
 
-The 'encryption' property must be either not specified or set to "Kms".
-An error will be emitted if encryption is set to "Unencrypted" or
-"Managed".
+The `encryption` property must be either not specified or set to `KMS` or `DSSE`.
+An error will be emitted if `encryption` is set to `UNENCRYPTED` or `S3_MANAGED`.
 
 ---
 
