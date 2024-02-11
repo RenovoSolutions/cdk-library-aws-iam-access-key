@@ -428,6 +428,8 @@ The principal.
 
 Restrict the permission to a certain key pattern (default '*').
 
+Parameter type is `any` but `string` should be passed in.
+
 ---
 
 ##### `grantPublicAccess` <a name="grantPublicAccess" id="@renovosolutions/cdk-library-aws-iam-access-key.AccessKeyFunctionCodeCache.grantPublicAccess"></a>
@@ -500,6 +502,8 @@ The principal.
 
 Restrict the permission to a certain key pattern (default '*').
 
+Parameter type is `any` but `string` should be passed in.
+
 ---
 
 ##### `grantPutAcl` <a name="grantPutAcl" id="@renovosolutions/cdk-library-aws-iam-access-key.AccessKeyFunctionCodeCache.grantPutAcl"></a>
@@ -550,6 +554,8 @@ The principal.
 - *Type:* any
 
 Restrict the permission to a certain key pattern (default '*').
+
+Parameter type is `any` but `string` should be passed in.
 
 ---
 
@@ -1361,6 +1367,7 @@ const accessKeyFunctionCodeCacheProps: AccessKeyFunctionCodeCacheProps = { ... }
 | <code><a href="#@renovosolutions/cdk-library-aws-iam-access-key.AccessKeyFunctionCodeCacheProps.property.inventories">inventories</a></code> | <code>aws-cdk-lib.aws_s3.Inventory[]</code> | The inventory configuration of the bucket. |
 | <code><a href="#@renovosolutions/cdk-library-aws-iam-access-key.AccessKeyFunctionCodeCacheProps.property.lifecycleRules">lifecycleRules</a></code> | <code>aws-cdk-lib.aws_s3.LifecycleRule[]</code> | Rules that define how Amazon S3 manages objects during their lifetime. |
 | <code><a href="#@renovosolutions/cdk-library-aws-iam-access-key.AccessKeyFunctionCodeCacheProps.property.metrics">metrics</a></code> | <code>aws-cdk-lib.aws_s3.BucketMetrics[]</code> | The metrics configuration of this bucket. |
+| <code><a href="#@renovosolutions/cdk-library-aws-iam-access-key.AccessKeyFunctionCodeCacheProps.property.minimumTLSVersion">minimumTLSVersion</a></code> | <code>number</code> | Enforces minimum TLS version for requests. |
 | <code><a href="#@renovosolutions/cdk-library-aws-iam-access-key.AccessKeyFunctionCodeCacheProps.property.notificationsHandlerRole">notificationsHandlerRole</a></code> | <code>aws-cdk-lib.aws_iam.IRole</code> | The role to be used by the notifications handler. |
 | <code><a href="#@renovosolutions/cdk-library-aws-iam-access-key.AccessKeyFunctionCodeCacheProps.property.objectLockDefaultRetention">objectLockDefaultRetention</a></code> | <code>aws-cdk-lib.aws_s3.ObjectLockRetention</code> | The default retention mode and rules for S3 Object Lock. |
 | <code><a href="#@renovosolutions/cdk-library-aws-iam-access-key.AccessKeyFunctionCodeCacheProps.property.objectLockEnabled">objectLockEnabled</a></code> | <code>boolean</code> | Enable object lock on the bucket. |
@@ -1369,6 +1376,7 @@ const accessKeyFunctionCodeCacheProps: AccessKeyFunctionCodeCacheProps = { ... }
 | <code><a href="#@renovosolutions/cdk-library-aws-iam-access-key.AccessKeyFunctionCodeCacheProps.property.removalPolicy">removalPolicy</a></code> | <code>aws-cdk-lib.RemovalPolicy</code> | Policy to apply when the bucket is removed from this stack. |
 | <code><a href="#@renovosolutions/cdk-library-aws-iam-access-key.AccessKeyFunctionCodeCacheProps.property.serverAccessLogsBucket">serverAccessLogsBucket</a></code> | <code>aws-cdk-lib.aws_s3.IBucket</code> | Destination bucket for the server access logs. |
 | <code><a href="#@renovosolutions/cdk-library-aws-iam-access-key.AccessKeyFunctionCodeCacheProps.property.serverAccessLogsPrefix">serverAccessLogsPrefix</a></code> | <code>string</code> | Optional log file prefix to use for the bucket's access logs. |
+| <code><a href="#@renovosolutions/cdk-library-aws-iam-access-key.AccessKeyFunctionCodeCacheProps.property.targetObjectKeyFormat">targetObjectKeyFormat</a></code> | <code>aws-cdk-lib.aws_s3.TargetObjectKeyFormat</code> | Optional key format for log objects. |
 | <code><a href="#@renovosolutions/cdk-library-aws-iam-access-key.AccessKeyFunctionCodeCacheProps.property.transferAcceleration">transferAcceleration</a></code> | <code>boolean</code> | Whether this bucket should have transfer acceleration turned on or not. |
 | <code><a href="#@renovosolutions/cdk-library-aws-iam-access-key.AccessKeyFunctionCodeCacheProps.property.versioned">versioned</a></code> | <code>boolean</code> | Whether this bucket should have versioning turned on or not. |
 | <code><a href="#@renovosolutions/cdk-library-aws-iam-access-key.AccessKeyFunctionCodeCacheProps.property.websiteErrorDocument">websiteErrorDocument</a></code> | <code>string</code> | The name of the error document (e.g. "404.html") for the website. `websiteIndexDocument` must also be set if this is set. |
@@ -1595,6 +1603,23 @@ The metrics configuration of this bucket.
 
 ---
 
+##### `minimumTLSVersion`<sup>Optional</sup> <a name="minimumTLSVersion" id="@renovosolutions/cdk-library-aws-iam-access-key.AccessKeyFunctionCodeCacheProps.property.minimumTLSVersion"></a>
+
+```typescript
+public readonly minimumTLSVersion: number;
+```
+
+- *Type:* number
+- *Default:* No minimum TLS version is enforced.
+
+Enforces minimum TLS version for requests.
+
+Requires `enforceSSL` to be enabled.
+
+> [https://docs.aws.amazon.com/AmazonS3/latest/userguide/amazon-s3-policy-keys.html#example-object-tls-version](https://docs.aws.amazon.com/AmazonS3/latest/userguide/amazon-s3-policy-keys.html#example-object-tls-version)
+
+---
+
 ##### `notificationsHandlerRole`<sup>Optional</sup> <a name="notificationsHandlerRole" id="@renovosolutions/cdk-library-aws-iam-access-key.AccessKeyFunctionCodeCacheProps.property.notificationsHandlerRole"></a>
 
 ```typescript
@@ -1712,6 +1737,19 @@ public readonly serverAccessLogsPrefix: string;
 Optional log file prefix to use for the bucket's access logs.
 
 If defined without "serverAccessLogsBucket", enables access logs to current bucket with this prefix.
+
+---
+
+##### `targetObjectKeyFormat`<sup>Optional</sup> <a name="targetObjectKeyFormat" id="@renovosolutions/cdk-library-aws-iam-access-key.AccessKeyFunctionCodeCacheProps.property.targetObjectKeyFormat"></a>
+
+```typescript
+public readonly targetObjectKeyFormat: TargetObjectKeyFormat;
+```
+
+- *Type:* aws-cdk-lib.aws_s3.TargetObjectKeyFormat
+- *Default:* the default key format is: [DestinationPrefix][YYYY]-[MM]-[DD]-[hh]-[mm]-[ss]-[UniqueString]
+
+Optional key format for log objects.
 
 ---
 
