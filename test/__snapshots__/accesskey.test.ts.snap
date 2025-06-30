@@ -1,29 +1,29 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
+// Jest Snapshot v1, https://jestjs.io/docs/snapshot-testing
 
 exports[`Snapshot 1`] = `
-Object {
-  "Parameters": Object {
-    "BootstrapVersion": Object {
+{
+  "Parameters": {
+    "BootstrapVersion": {
       "Default": "/cdk-bootstrap/hnb659fds/version",
       "Description": "Version of the CDK Bootstrap resources in this environment, automatically retrieved from SSM Parameter Store. [cdk:skip]",
       "Type": "AWS::SSM::Parameter::Value<String>",
     },
   },
-  "Resources": Object {
-    "AccessKeyOnEventHandler25470BD2": Object {
-      "DependsOn": Array [
+  "Resources": {
+    "AccessKeyOnEventHandler25470BD2": {
+      "DependsOn": [
         "AccessKeyRoleADB5A258",
       ],
-      "Properties": Object {
-        "Code": Object {
-          "S3Bucket": Object {
+      "Properties": {
+        "Code": {
+          "S3Bucket": {
             "Fn::Sub": "cdk-hnb659fds-assets-\${AWS::AccountId}-\${AWS::Region}",
           },
           "S3Key": "bc28be0ae267e7a304632531aa839902260d844d367c60aa8dfbe5bf775a3a52.zip",
         },
         "Handler": "index.handler",
-        "Role": Object {
-          "Fn::GetAtt": Array [
+        "Role": {
+          "Fn::GetAtt": [
             "AccessKeyRoleADB5A258",
             "Arn",
           ],
@@ -33,30 +33,30 @@ Object {
       },
       "Type": "AWS::Lambda::Function",
     },
-    "AccessKeyRoleADB5A258": Object {
-      "Properties": Object {
-        "AssumeRolePolicyDocument": Object {
-          "Statement": Array [
-            Object {
+    "AccessKeyRoleADB5A258": {
+      "Properties": {
+        "AssumeRolePolicyDocument": {
+          "Statement": [
+            {
               "Action": "sts:AssumeRole",
               "Effect": "Allow",
-              "Principal": Object {
+              "Principal": {
                 "Service": "lambda.amazonaws.com",
               },
             },
           ],
           "Version": "2012-10-17",
         },
-        "ManagedPolicyArns": Array [
-          Object {
+        "ManagedPolicyArns": [
+          {
             "Ref": "AccessKeySecretsManagerPolicy9E9D8FF3",
           },
-          Object {
-            "Fn::Join": Array [
+          {
+            "Fn::Join": [
               "",
-              Array [
+              [
                 "arn:",
-                Object {
+                {
                   "Ref": "AWS::Partition",
                 },
                 ":iam::aws:policy/service-role/AWSLambdaBasicExecutionRole",
@@ -67,47 +67,47 @@ Object {
       },
       "Type": "AWS::IAM::Role",
     },
-    "AccessKeySecretArn846E33B5": Object {
+    "AccessKeySecretArn846E33B5": {
       "DeletionPolicy": "Delete",
-      "Properties": Object {
+      "Properties": {
         "KmsKeyId": "alias/aws/secretsmanager",
         "Override": true,
-        "Region": Object {
+        "Region": {
           "Ref": "AWS::Region",
         },
         "Restore": true,
-        "SecretName": Object {
-          "Fn::Join": Array [
+        "SecretName": {
+          "Fn::Join": [
             "",
-            Array [
+            [
               "TestStackAccessKeyAE8900C2",
-              Object {
+              {
                 "Ref": "User00B015A1",
               },
             ],
           ],
         },
-        "ServiceToken": Object {
-          "Fn::GetAtt": Array [
+        "ServiceToken": {
+          "Fn::GetAtt": [
             "AccessKeyOnEventHandler25470BD2",
             "Arn",
           ],
         },
-        "UserName": Object {
+        "UserName": {
           "Ref": "User00B015A1",
         },
       },
       "Type": "AWS::CloudFormation::CustomResource",
       "UpdateReplacePolicy": "Delete",
     },
-    "AccessKeySecretsManagerPolicy9E9D8FF3": Object {
-      "Properties": Object {
+    "AccessKeySecretsManagerPolicy9E9D8FF3": {
+      "Properties": {
         "Description": "",
         "Path": "/",
-        "PolicyDocument": Object {
-          "Statement": Array [
-            Object {
-              "Action": Array [
+        "PolicyDocument": {
+          "Statement": [
+            {
+              "Action": [
                 "secretsmanager:PutSecretValue",
                 "secretsmanager:CreateSecret",
                 "secretsmanager:DeleteSecret",
@@ -116,20 +116,20 @@ Object {
                 "secretsmanager:RestoreSecret",
               ],
               "Effect": "Allow",
-              "Resource": Object {
-                "Fn::Join": Array [
+              "Resource": {
+                "Fn::Join": [
                   "",
-                  Array [
+                  [
                     "arn:aws:secretsmanager:",
-                    Object {
+                    {
                       "Ref": "AWS::Region",
                     },
                     ":",
-                    Object {
+                    {
                       "Ref": "AWS::AccountId",
                     },
                     ":secret:TestStackAccessKeyAE8900C2",
-                    Object {
+                    {
                       "Ref": "User00B015A1",
                     },
                     "-*",
@@ -138,15 +138,15 @@ Object {
               },
               "Sid": "SecretsManagerPolicy",
             },
-            Object {
-              "Action": Array [
+            {
+              "Action": [
                 "iam:CreateAccessKey",
                 "iam:DeleteAccessKey",
                 "iam:ListAccessKeys",
               ],
-              "Condition": Object {
-                "StringEquals": Object {
-                  "iam:ResourceTag/CfnStackIdForAccessKeyLibrary": Object {
+              "Condition": {
+                "StringEquals": {
+                  "iam:ResourceTag/CfnStackIdForAccessKeyLibrary": {
                     "Ref": "AWS::StackId",
                   },
                 },
@@ -161,12 +161,12 @@ Object {
       },
       "Type": "AWS::IAM::ManagedPolicy",
     },
-    "User00B015A1": Object {
-      "Properties": Object {
-        "Tags": Array [
-          Object {
+    "User00B015A1": {
+      "Properties": {
+        "Tags": [
+          {
             "Key": "CfnStackIdForAccessKeyLibrary",
-            "Value": Object {
+            "Value": {
               "Ref": "AWS::StackId",
             },
           },
@@ -175,22 +175,22 @@ Object {
       "Type": "AWS::IAM::User",
     },
   },
-  "Rules": Object {
-    "CheckBootstrapVersion": Object {
-      "Assertions": Array [
-        Object {
-          "Assert": Object {
-            "Fn::Not": Array [
-              Object {
-                "Fn::Contains": Array [
-                  Array [
+  "Rules": {
+    "CheckBootstrapVersion": {
+      "Assertions": [
+        {
+          "Assert": {
+            "Fn::Not": [
+              {
+                "Fn::Contains": [
+                  [
                     "1",
                     "2",
                     "3",
                     "4",
                     "5",
                   ],
-                  Object {
+                  {
                     "Ref": "BootstrapVersion",
                   },
                 ],
