@@ -1,3 +1,6 @@
+> [!WARNING]
+> This project is no longer maintained. You should use the [first party AccessKey L2 construct](https://docs.aws.amazon.com/cdk/api/v2/docs/aws-cdk-lib.aws_iam.AccessKey.html)
+
 # AWS CDK Construct for IAM User Access Keys
 
 [![build](https://github.com/RenovoSolutions/cdk-library-aws-iam-access-key/actions/workflows/build.yml/badge.svg)](https://github.com/RenovoSolutions/cdk-library-aws-iam-access-key/actions/workflows/build.yml)
